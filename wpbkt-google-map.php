@@ -30,8 +30,8 @@ function wpbkt_google_map_add_menu(){
         'manage_options',
         'google-map',
         'wpbkt_google_map_add_menu_callback',
-        'dashicons-marker',
-        6
+        'dashicons-admin-site',
+        60
     );
 }
 add_action( 'admin_menu', 'wpbkt_google_map_add_menu' );
@@ -42,3 +42,44 @@ add_action( 'admin_menu', 'wpbkt_google_map_add_menu' );
 function wpbkt_google_map_add_menu_callback(){
     esc_html_e( 'Admin Page Test', 'textdomain' );
 }
+// Register style sheet.
+add_action( 'admin_enqueue_scripts', 'register_plugin_styles' );
+
+/**
+ * Register style sheet.
+ */
+function register_plugin_styles() {
+	wp_register_style( 'wpbkt_google_map_css', plugins_url('',__FILE__) .'/css/wpbkt-google-map.css' );
+	wp_enqueue_style( 'wpbkt_google_map_css' );
+    wp_enqueue_script( 'wpbkt_google_map_js', plugins_url('',__FILE__) .'/js/wpbkt-google-map.js', array(), '', true );
+}
+
+ 
+ add_shortcode( 'google_map', 'wpbkt_google_map_shortcode_cbd' );
+
+
+ function wpbkt_google_map_shortcode_cbd($atts) {
+
+ 	shortcode_atts( array( 'lat'=>'', 'long'=> '' ), $atts, 'google_map' );
+ 	
+ 	if($atts['lat'] === 1 ) :
+ 	
+ 	return "This is shorcode output when lat is 1";
+
+ 	endif;
+
+
+
+ }
+
+
+
+
+
+
+
+
+
+
+
+
